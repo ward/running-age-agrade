@@ -51,28 +51,49 @@ function name_to_index(name) {
   }
 }
 
-function get_age_grade(time, distance, age, gender, surface) {
-  // Age starts at 5 through 100
-  if (age < 5 || age > 100) {
+function get_world_record(distance, age, gender, surface) {
+  if (!validate.age(age)) {
     throw new Error("Age has to be in the [5, 100] range");
   }
-  if (gender !== "male" && gender !== "female") {
+  if (!validate.gender(gender)) {
     throw new Error("Gender has to be male or female");
   }
-  if (surface !== "road" && surface !== "track") {
+  if (!validate.surface(surface)) {
     throw new Error("Surface has to be road or track");
-  }
-  if (typeof time !== "number" || time <= 0) {
-    throw new Error("Expected a positive number as time");
   }
   let idx = name_to_index(distance);
   let age_index = age - 5;
   let age_data = data[surface][gender][age_index];
-  let world_record = age_data[idx];
+  return age_data[idx];
+}
+
+function get_age_grade(time, distance, age, gender, surface) {
+  if (!validate.time(time)) {
+    throw new Error("Expected a positive number as time");
+  }
+  let world_record = get_world_record(distance, age, gender, surface);
   let ratio = world_record / time;
   return ratio * 100;
 }
 
+function get_time(age_grade, distance, age, gender, surface) {
+  if (!validate.age_grade(age_grade)) {
+    throw new Error("Expected a positive number as age grade");
+  }
+  let world_record = get_world_record(distance, age, gender, surface);
+  let time = world_record / (age_grade / 100);
+  return time;
+}
+
+const validate = {
+  "time": t => typeof t === "number" && t > 0,
+  "surface": s => s === "road" || s === "track",
+  "gender": g => g === "male" || g === "female",
+  "age": n => n >= 5 && n <= 100,
+  "age_grade": ag => typeof ag === "number" && ag > 0
+};
+
 module.exports = {
-  "get_age_grade": get_age_grade
+  "get_age_grade": get_age_grade,
+  "get_time": get_time
 };
