@@ -1,0 +1,33 @@
+{
+  "name": "running-age-grade",
+  "version": "0.0.1",
+  "description": "Access age grading for various distances based on Alan L. Jones' data.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ward/running-age-agrade.git"
+  },
+  "keywords": [
+    "running",
+    "age",
+    "grade",
+    "track",
+    "road",
+    "world",
+    "masters",
+    "athletics"
+  ],
+  "author": "Ward Muylaert",
+  "contributors": [
+    "Ward Muylaert",
+    "Alan L. Jones"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ward/running-age-agrade/issues"
+  },
+  "homepage": "https://github.com/ward/running-age-agrade#readme"
+}
