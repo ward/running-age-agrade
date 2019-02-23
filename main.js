@@ -73,5 +73,6 @@ function get_age_grade(time, distance, age, gender, surface) {
   return ratio * 100;
 }
 
-console.log(get_age_grade(317, "mile", 29, "male", "track"));
-console.log(get_age_grade(1036, "5 km", 29, "male", "road"));
+module.exports = {
+  "get_age_grade": get_age_grade
+};
